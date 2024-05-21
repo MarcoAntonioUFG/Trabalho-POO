@@ -1,35 +1,59 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
+import java.awt.FlowLayout;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTextArea;
-import javax.swing.DropMode;
-import javax.swing.JTextPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.Component;
+import javax.swing.Box;
 
 public class Ui {
 
 	private JFrame frame;
 	private JTextField textField;
+	private Usuario usuario;
+	private Mediador mediador;
+	private JTextPane mensagens = new JTextPane();
 
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the application.
-	 */
-	public Ui() {
+	public Usuario getUsuario() { return usuario; }
+	public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+	
+	
+	public Ui(Usuario usuario) {
+		this.usuario = usuario;
+		this.mediador = usuario.getMediador();
+		usuario.setUi(this);
 		initialize();
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	public void setMensagens(ArrayList<String> lista) {
+		String aux = "";
+		for (String item : lista) {
+            aux += item;
+        }
+		this.mensagens.setText(aux);
+	}
+	
+	public void atualizar() {
+		setMensagens(((MediadorConcreto)mediador).getHistorico());
+	}
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 445);
@@ -38,10 +62,44 @@ public class Ui {
 		textField = new JTextField();
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
+		mensagens.setEditable(false);
+		StyledDocument doc = mensagens.getStyledDocument();
+        SimpleAttributeSet rightAlign = new SimpleAttributeSet();
+        StyleConstants.setAlignment(rightAlign, StyleConstants.ALIGN_RIGHT);
+        doc.setParagraphAttributes(0, doc.getLength(), rightAlign, false);
+        
+		JButton botao = new JButton("Enviar");
 		
-		JTextPane mensagens = new JTextPane();
-		mensagens.setText("msg1\n msg2\n msg3\n");
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                	if(!textField.getText().isEmpty()) {
+                		String caixaTexto = textField.getText();
+                		((MediadorConcreto)mediador).receberMensagem(usuario, caixaTexto); 
+                		textField.setText("");
+                		atualizar();
+                		((MediadorConcreto)mediador).Notificar();
+                	}
+                }
+            }
+		});
+		
+		ActionListener send;
+		send = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(!textField.getText().isEmpty()) {
+            		String caixaTexto = textField.getText();
+            		((MediadorConcreto)mediador).receberMensagem(usuario, caixaTexto); 
+            		textField.setText("");
+            		atualizar();
+            		((MediadorConcreto)mediador).Notificar();
+            	}
+			}
+		};
+		botao.addActionListener(send);
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -52,7 +110,7 @@ public class Ui {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton)))
+							.addComponent(botao)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -63,7 +121,7 @@ public class Ui {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+						.addComponent(botao, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		frame.getContentPane().setLayout(groupLayout);
@@ -73,7 +131,7 @@ public class Ui {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ui window = new Ui();
+					Ui window = new Ui(usuario);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,4 +139,5 @@ public class Ui {
 			}
 		});
 	}
+
 }
