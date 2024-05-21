@@ -2,35 +2,30 @@ import java.util.ArrayList;
 
 public class MediadorConcreto implements Mediador {
 
-	private ArrayList<String> historico;
+	private ArrayList<String> historico = new ArrayList<String>();
 	private Usuario user1;
 	private Usuario user2;
-	private String remetente;
-	private String destinatario;
 	
-	public MediadorConcreto(Usuario user1, Usuario user2, String remetente, String destinatario) {
-		setHistorico(new ArrayList<String>());
-		this.user1 = user1;
-		this.user2 = user2;
-		this.remetente = remetente;
-		this.destinatario = destinatario;
+	
+	public MediadorConcreto() {
 	}
-	
 	
 	@Override
-	public void EnviarMensagem(Usuario user1, Usuario user2) {
-		remetente = user1.getNome();
-		destinatario = user2.getNome();
-		historico.add(remetente+user1.getMensagem());
+	public void Notificar() {
+		if (user1 != null && user1.getUi() != null) {
+            user1.getUi().atualizar();
+        }
+        if (user2 != null && user2.getUi() != null) {
+            user2.getUi().atualizar();
+        }
 	}
-
+	
 	@Override
-	public void ReceberMensagem(Usuario user1, Usuario user2) {
-		remetente = user2.getNome();
-		destinatario = user1.getNome();
-		historico.add(remetente+user1.getMensagem());
+	public void receberMensagem(Usuario user, String mensagem){
+		historico.add(user.getNome() + ": " + mensagem + "\n");
+		Notificar();
 	}
-
+	
 
 	public ArrayList<String> getHistorico() {
 		return historico;
@@ -62,23 +57,4 @@ public class MediadorConcreto implements Mediador {
 	}
 
 
-	public String getRemetente() {
-		return remetente;
-	}
-
-
-	public void setRemetente(String remetente) {
-		this.remetente = remetente;
-	}
-
-
-	public String getDestinatario() {
-		return destinatario;
-	}
-
-
-	public void setDestinatario(String destinatario) {
-		this.destinatario = destinatario;
-	}
-	
 }
