@@ -100,6 +100,7 @@ public class Ui {
 		botao.addActionListener(send);
 		
 		JTextPane txtpnUsuario = new JTextPane();
+		txtpnUsuario.setEditable(false);
 		if(usuario == ((MediadorConcreto)mediador).getUser1()) {
 			String aux = ((MediadorConcreto)mediador).getUser2().getNome();
 			txtpnUsuario.setText(aux);
@@ -114,10 +115,10 @@ public class Ui {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtpnUsuario, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(txtpnUsuario, GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
 						.addComponent(mensagens, GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(botao)))
@@ -127,9 +128,9 @@ public class Ui {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(txtpnUsuario, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+					.addComponent(txtpnUsuario, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(mensagens, GroupLayout.PREFERRED_SIZE, 308, GroupLayout.PREFERRED_SIZE)
+					.addComponent(mensagens, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
