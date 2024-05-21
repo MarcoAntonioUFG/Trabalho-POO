@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextArea;
@@ -100,15 +99,26 @@ public class Ui {
 		};
 		botao.addActionListener(send);
 		
+		JTextPane txtpnUsuario = new JTextPane();
+		if(usuario == ((MediadorConcreto)mediador).getUser1()) {
+			String aux = ((MediadorConcreto)mediador).getUser2().getNome();
+			txtpnUsuario.setText(aux);
+		}
+		else if(usuario == ((MediadorConcreto)mediador).getUser2()) {
+			String aux = ((MediadorConcreto)mediador).getUser1().getNome();
+			txtpnUsuario.setText(aux);
+		}
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(txtpnUsuario, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
 						.addComponent(mensagens, GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(textField, GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(botao)))
 					.addContainerGap())
@@ -117,7 +127,9 @@ public class Ui {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(mensagens, GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
+					.addComponent(txtpnUsuario, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(mensagens, GroupLayout.PREFERRED_SIZE, 308, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
@@ -139,5 +151,4 @@ public class Ui {
 			}
 		});
 	}
-
 }
