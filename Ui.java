@@ -1,10 +1,7 @@
 import java.awt.EventQueue;
 import javax.swing.JFrame;
-import java.awt.FlowLayout;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -12,15 +9,11 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import java.awt.Component;
-import javax.swing.Box;
 
 public class Ui {
 
@@ -102,11 +95,11 @@ public class Ui {
 		JTextPane txtpnUsuario = new JTextPane();
 		txtpnUsuario.setEditable(false);
 		if(usuario == ((MediadorConcreto)mediador).getUser1()) {
-			String aux = ((MediadorConcreto)mediador).getUser2().getNome();
+			String aux = ((MediadorConcreto)mediador).getUser1().getNome()+"->"+((MediadorConcreto)mediador).getUser2().getNome();
 			txtpnUsuario.setText(aux);
 		}
 		else if(usuario == ((MediadorConcreto)mediador).getUser2()) {
-			String aux = ((MediadorConcreto)mediador).getUser1().getNome();
+			String aux = ((MediadorConcreto)mediador).getUser2().getNome()+"->"+((MediadorConcreto)mediador).getUser1().getNome();
 			txtpnUsuario.setText(aux);
 		}
 		
