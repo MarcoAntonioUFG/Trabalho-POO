@@ -22,7 +22,6 @@ public class MediadorConcreto implements Mediador {
 	@Override
 	public void addMessage(Usuario remetente, String mensagem) {
 		historico.add(remetente.getNome() + ": " + mensagem + "\n");
-		System.out.println(remetente.getNome() + ": " + mensagem + "\n");
 		for(Usuario user : usuarios) {
 			user.addText(remetente.getNome() + ": " + mensagem + "\n");
 		}
