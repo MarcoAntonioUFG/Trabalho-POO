@@ -1,24 +1,11 @@
-import java.awt.ComponentOrientation;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.Font;
 
@@ -44,7 +31,7 @@ public class Ui {
 		frame.getContentPane().setLayout(null);
 		frame.setSize(450, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		textField_Mensagens.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		textField_Mensagens.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 47, 414, 294);
@@ -88,7 +75,7 @@ public class Ui {
 		textField_Mensagens.setColumns(10);
 		
 		// DESTINATARIO (COM QUEM VC ESTA FALANDO) <----
-		destinatarioUser.setText(usuario2);
+		destinatarioUser.setText(usuario.getNome()+"------->"+usuario2);
 		destinatarioUser.setEditable(false);
 		destinatarioUser.setBounds(10, 11, 414, 25);
 		
