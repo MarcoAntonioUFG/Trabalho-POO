@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
-public class Usuario {
+public class Usuario{
 	private String nome;
 	private Mediador mediador;
 	private Ui ui;
 	
-	
-	public Usuario(String nome) {
+	public Usuario(String nome, Mediador mediador) {
 		this.nome = nome;
+		this.mediador = mediador;
+		mediador.addUsuario(this);
 	}
 	
 	public Ui getUi() {
@@ -18,8 +19,8 @@ public class Usuario {
 		this.ui = ui;
 	}
 	
-	public void enviarMensagem(String mensagem, Usuario dest) {
-        ((MediadorConcreto)mediador).receberMensagem(this, mensagem);
+	public void enviarMensagem(String mensagem) {
+        mediador.addMessage(this, mensagem);
     }
 	
 	public String getNome() {
@@ -35,5 +36,13 @@ public class Usuario {
 
 	public void setMediador(Mediador mediador) {
 		this.mediador = mediador;
+	}
+
+	public void addText(String mensagem) {
+		ui.addText(mensagem);
+	}
+
+	public String enviarOutroUsuario() {
+		return mediador.getOutroUsuario(this);
 	}
 }

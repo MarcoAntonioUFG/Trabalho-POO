@@ -1,60 +1,51 @@
 import java.util.ArrayList;
 
 public class MediadorConcreto implements Mediador {
-
-	private ArrayList<String> historico = new ArrayList<String>();
-	private Usuario user1;
-	private Usuario user2;
 	
+	private ArrayList<String> historico = new ArrayList<String>();
+	private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 	
 	public MediadorConcreto() {
+		
 	}
-	
+		
 	@Override
-	public void Notificar() {
-		if (user1 != null && user1.getUi() != null) {
-            user1.getUi().atualizar();
-        }
-        if (user2 != null && user2.getUi() != null) {
-            user2.getUi().atualizar();
-        }
-	}
-	
-	@Override
-	public void receberMensagem(Usuario user, String mensagem){
-		historico.add(user.getNome() + ": " + mensagem + "\n");
-		Notificar();
-	}
-	
-
 	public ArrayList<String> getHistorico() {
 		return historico;
 	}
 
-
-	public void setHistorico(ArrayList<String> historico) {
-		this.historico = historico;
+	@Override
+	public void Notificar(Usuario user) {
+		
+	}
+	
+	@Override
+	public void addMessage(Usuario remetente, String mensagem) {
+		historico.add(remetente.getNome() + ": " + mensagem + "\n");
+		System.out.println(remetente.getNome() + ": " + mensagem + "\n");
+		for(Usuario user : usuarios) {
+			user.addText(remetente.getNome() + ": " + mensagem + "\n");
+		}
+	}
+	
+	@Override 
+	public void addUsuario(Usuario usuario) {
+		usuarios.add(usuario);
+	}
+	
+	public ArrayList<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-
-	public Usuario getUser1() {
-		return user1;
+	public void setUsuarios(ArrayList<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
-
-	public void setUser1(Usuario user1) {
-		this.user1 = user1;
+	@Override
+	public String getOutroUsuario(Usuario user) {
+		for(Usuario usuario : usuarios) {
+			if(usuario != user) return usuario.getNome();
+		}
+		return "Error";
 	}
-
-
-	public Usuario getUser2() {
-		return user2;
-	}
-
-
-	public void setUser2(Usuario user2) {
-		this.user2 = user2;
-	}
-
-
 }
