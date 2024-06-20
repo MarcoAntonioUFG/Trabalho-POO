@@ -8,12 +8,12 @@ public class Main {
 		String nome1 = JOptionPane.showInputDialog("Insira seu nome:");
 		String nome2 = JOptionPane.showInputDialog("Insira seu nome:");
 		
-		
 		Usuario usuario1 = new Usuario(nome1, mediador);
 		Usuario usuario2 = new Usuario(nome2, mediador);
 		
 		Ui ui1 = new Ui(usuario1);
+		ui1.setCoord(1050, 300);
 		Ui ui2 = new Ui(usuario2);
-		
+		ui2.setCoord(550, 300);
 	}
 }

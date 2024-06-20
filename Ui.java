@@ -27,7 +27,7 @@ public class Ui {
 		mediador = usuario.getMediador();
 		
 		String usuario2 = usuario.enviarOutroUsuario();
-		
+
 		frame.getContentPane().setLayout(null);
 		frame.setSize(450, 450);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,6 +84,10 @@ public class Ui {
 		frame.getContentPane().add(scrollPane);
 		
 		frame.setVisible(true);
+	}
+
+	public void setCoord(int x, int y){
+		this.frame.setLocation(x, y);
 	}
 
 
