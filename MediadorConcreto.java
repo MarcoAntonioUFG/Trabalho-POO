@@ -15,11 +15,6 @@ public class MediadorConcreto implements Mediador {
 	}
 
 	@Override
-	public void Notificar(Usuario user) {
-		
-	}
-	
-	@Override
 	public void addMessage(Usuario remetente, String mensagem) {
 		historico.add(remetente.getNome() + ": " + mensagem + "\n");
 		for(Usuario user : usuarios) {
