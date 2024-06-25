@@ -19,10 +19,6 @@ public class Usuario{
 		this.ui = ui;
 	}
 	
-	public void enviarMensagem(String mensagem) {
-       		mediador.addMessage(this, mensagem);
-    	}
-	
 	public String getNome() {
 		return nome;
 	}
@@ -37,6 +33,10 @@ public class Usuario{
 	public void setMediador(Mediador mediador) {
 		this.mediador = mediador;
 	}
+	
+	public void enviarMensagem(String mensagem) {
+       		mediador.addMessage(this, mensagem);
+    	}
 
 	public void addText(String mensagem) {
 		ui.addText(mensagem);
