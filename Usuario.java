@@ -20,8 +20,8 @@ public class Usuario{
 	}
 	
 	public void enviarMensagem(String mensagem) {
-        mediador.addMessage(this, mensagem);
-    }
+       		mediador.addMessage(this, mensagem);
+    	}
 	
 	public String getNome() {
 		return nome;
